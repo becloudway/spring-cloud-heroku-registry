@@ -25,6 +25,6 @@ public class MetadataResource implements MetadataProvider {
     }
 
     public Map<String, String> getMetadata(@NotNull URI instanceURI){
-        return restTemplate.getForObject(instanceURI, Map.class);
+        return restTemplate.getForObject(instanceURI.resolve("/heroku-spring-cloud-discovery"), Map.class);
     }
 }
