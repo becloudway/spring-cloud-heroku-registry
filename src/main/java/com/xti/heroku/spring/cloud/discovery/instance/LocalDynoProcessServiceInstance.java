@@ -1,15 +1,17 @@
-package com.xti.heroku.spring.cloud.discovery;
+package com.xti.heroku.spring.cloud.discovery.instance;
 
+import com.xti.heroku.spring.cloud.discovery.metadata.MetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 import java.net.URI;
 import java.util.Map;
 
-public class DynoProcessServiceInstance implements ServiceInstance {
+public class LocalDynoProcessServiceInstance implements ServiceInstance {
 
     private String serviceId;
     private String host;
     private int port;
+    private MetadataProvider metadataProvider;
 
     /**
      * When creating a transient DynoProcessServiceInstance in the HerokuPrivateSpaceDnsDiscoveryClient the following
@@ -18,11 +20,13 @@ public class DynoProcessServiceInstance implements ServiceInstance {
      * @param serviceId process.app
      * @param host nslookup retrieved host
      * @param port known by HerokuPrivateSpaceDnsDiscoveryClient by service string parsing.
+     * @param metadataProvider provider used to get local metadata with mutable access.
      */
-    public DynoProcessServiceInstance(String serviceId, String host, int port) {
+    public LocalDynoProcessServiceInstance(String serviceId, String host, int port, MetadataProvider metadataProvider) {
         this.serviceId = serviceId;
         this.host = host;
         this.port = port;
+        this.metadataProvider = metadataProvider;
     }
 
     public String getServiceId() {
@@ -45,8 +49,7 @@ public class DynoProcessServiceInstance implements ServiceInstance {
         return URI.create(host + ":" + port);
     }
 
-    //TODO: store this in a database/cache or API exposed by instance itself? Shouldn't be that volatile on Heroku.
     public Map<String, String> getMetadata() {
-        return null;
+        return metadataProvider.getMetadata();
     }
 }
