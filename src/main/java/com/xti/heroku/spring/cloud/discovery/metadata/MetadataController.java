@@ -6,25 +6,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.constraints.NotNull;
-import java.net.URI;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 @RequestMapping("/heroku-spring-cloud-discovery")
-public class MetadataResource implements MetadataProvider {
+public class MetadataController {
 
-    public Map<String, String> metadata = new ConcurrentHashMap<String, String>();
+    private MetadataProvider metadataProvider = LocallyMutableMetadataProvider.getInstance();
 
     private RestTemplate restTemplate = new RestTemplate();
 
     @GetMapping()
     public @ResponseBody Map<String, String> getMetadata() {
-        return metadata;
+        return metadataProvider.getMetadata();
     }
 
-    public Map<String, String> getMetadata(@NotNull URI instanceURI){
-        return restTemplate.getForObject(instanceURI.resolve("/heroku-spring-cloud-discovery"), Map.class);
-    }
 }

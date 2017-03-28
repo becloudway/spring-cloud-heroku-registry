@@ -6,7 +6,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import java.net.URI;
 import java.util.Map;
 
-public class DynoProcessServiceInstance implements ServiceInstance {
+public class RemoteDynoProcessServiceInstance implements ServiceInstance {
 
     private String serviceId;
     private String host;
@@ -22,7 +22,7 @@ public class DynoProcessServiceInstance implements ServiceInstance {
      * @param port known by HerokuPrivateSpaceDnsDiscoveryClient by service string parsing.
      * @param metadataProvider provider used to get remote metadata with read only access.
      */
-    public DynoProcessServiceInstance(String serviceId, String host, int port, MetadataProvider metadataProvider) {
+    public RemoteDynoProcessServiceInstance(String serviceId, String host, int port, MetadataProvider metadataProvider) {
         this.serviceId = serviceId;
         this.host = host;
         this.port = port;
