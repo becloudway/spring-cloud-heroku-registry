@@ -1,7 +1,7 @@
-package com.xti.heroku.spring.cloud.discovery;
+package com.xti.spring.cloud.heroku.discovery;
 
-import com.xti.heroku.spring.cloud.discovery.process.HerokuFormationNameServiceProvider;
-import com.xti.heroku.spring.cloud.discovery.process.HerokuProcessServiceProvider;
+import com.xti.spring.cloud.heroku.discovery.process.HerokuFormationNameServiceProvider;
+import com.xti.spring.cloud.heroku.discovery.process.HerokuProcessServiceProvider;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;

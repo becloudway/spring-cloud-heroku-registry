@@ -1,8 +1,8 @@
-package com.xti.heroku.spring.cloud.discovery;
+package com.xti.spring.cloud.heroku.discovery;
 
-import com.xti.heroku.spring.cloud.discovery.instance.LocalDynoProcessServiceInstance;
-import com.xti.heroku.spring.cloud.discovery.instance.RemoteDynoProcessServiceInstance;
-import com.xti.heroku.spring.cloud.discovery.metadata.LocallyMutableMetadataProvider;
+import com.xti.spring.cloud.heroku.discovery.instance.LocalDynoProcessServiceInstance;
+import com.xti.spring.cloud.heroku.discovery.instance.RemoteDynoProcessServiceInstance;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 public class DynoProcessServiceInstanceBuilder {

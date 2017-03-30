@@ -1,4 +1,4 @@
-package com.xti.heroku.spring.cloud.discovery.metadata;
+package com.xti.spring.cloud.heroku.discovery.metadata;
 
 import org.springframework.web.client.RestTemplate;
 
@@ -31,7 +31,7 @@ public class LocallyMutableMetadataProvider implements MetadataProvider {
 
     public Map<String, String> getMetadata(@NotNull URI instanceURI){
         try {
-            return restTemplate.getForObject(instanceURI.resolve("/heroku-spring-cloud-discovery"), Map.class);
+            return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-discovery"), Map.class);
         } catch (Exception e) {
             return new HashMap<>();
         }

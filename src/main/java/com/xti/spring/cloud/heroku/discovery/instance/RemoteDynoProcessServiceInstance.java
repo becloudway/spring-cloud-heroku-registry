@@ -1,6 +1,6 @@
-package com.xti.heroku.spring.cloud.discovery.instance;
+package com.xti.spring.cloud.heroku.discovery.instance;
 
-import com.xti.heroku.spring.cloud.discovery.metadata.MetadataProvider;
+import com.xti.spring.cloud.heroku.discovery.metadata.MetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 import java.net.URI;

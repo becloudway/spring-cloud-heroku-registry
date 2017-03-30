@@ -1,4 +1,4 @@
-package com.xti.heroku.spring.cloud.discovery.process;
+package com.xti.spring.cloud.heroku.discovery.process;
 
 import java.util.List;
 

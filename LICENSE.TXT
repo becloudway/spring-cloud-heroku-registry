@@ -1,4 +1,4 @@
-Copyright (c) 2017 XT-i/heroku-spring-cloud-discovery members
+Copyright (c) 2017 XT-i/spring-cloud-heroku-discovery members
 
 MIT License
 

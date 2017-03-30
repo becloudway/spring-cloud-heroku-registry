@@ -1,4 +1,4 @@
-package com.xti.heroku.spring.cloud.discovery.metadata;
+package com.xti.spring.cloud.heroku.discovery.metadata;
 
 import javax.validation.constraints.NotNull;
 import java.net.URI;

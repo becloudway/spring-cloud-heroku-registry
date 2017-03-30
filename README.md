@@ -1,4 +1,4 @@
-# heroku-spring-cloud-discovery
+# spring-cloud-heroku-discovery
 
 Spring Cloud Discovery extension based on Heroku Private Spaces DNS Registry.
 

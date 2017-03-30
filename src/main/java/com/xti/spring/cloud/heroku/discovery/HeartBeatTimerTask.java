@@ -1,4 +1,4 @@
-package com.xti.heroku.spring.cloud.discovery;
+package com.xti.spring.cloud.heroku.discovery;
 
 import org.springframework.cloud.client.discovery.event.HeartbeatEvent;
 import org.springframework.context.ApplicationEventPublisher;
