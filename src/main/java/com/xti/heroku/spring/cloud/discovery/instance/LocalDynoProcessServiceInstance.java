@@ -46,7 +46,7 @@ public class LocalDynoProcessServiceInstance implements ServiceInstance {
     }
 
     public URI getUri() {
-        return URI.create(host + ":" + port);
+        return URI.create("http://" + host + ":" + port);
     }
 
     public Map<String, String> getMetadata() {

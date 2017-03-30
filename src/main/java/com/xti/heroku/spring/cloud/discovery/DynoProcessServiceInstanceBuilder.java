@@ -59,7 +59,7 @@ public class DynoProcessServiceInstanceBuilder {
             final String[] herokuParts = herokuDnsFormationName.split("\\.");
             final String process = herokuParts[0];
             final String app = herokuParts[1];
-            final String portString = System.getenv("CLUSTER_PORT_SELF");
+            final String portString = System.getenv("CLUSTER_PORT");
             final int port = Integer.parseInt(portString);
             final String host = System.getenv("HEROKU_PRIVATE_IP");
 

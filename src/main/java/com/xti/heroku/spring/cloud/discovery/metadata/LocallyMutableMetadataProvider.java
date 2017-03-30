@@ -4,6 +4,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.validation.constraints.NotNull;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +30,11 @@ public class LocallyMutableMetadataProvider implements MetadataProvider {
     }
 
     public Map<String, String> getMetadata(@NotNull URI instanceURI){
-        return restTemplate.getForObject(instanceURI.resolve("/heroku-spring-cloud-discovery"), Map.class);
+        try {
+            return restTemplate.getForObject(instanceURI.resolve("/heroku-spring-cloud-discovery"), Map.class);
+        } catch (Exception e) {
+            return new HashMap<>();
+        }
     }
 
     public void setMetadata(Map<String, String> metadata) {

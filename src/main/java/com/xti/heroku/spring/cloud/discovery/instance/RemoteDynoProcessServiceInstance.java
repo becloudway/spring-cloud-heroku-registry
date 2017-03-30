@@ -46,7 +46,7 @@ public class RemoteDynoProcessServiceInstance implements ServiceInstance {
     }
 
     public URI getUri() {
-        return URI.create(host + ":" + port);
+        return URI.create("http://" + host + ":" + port);
     }
 
     //TODO: store this in a database/cache or API exposed by instance itself? Shouldn't be that volatile on Heroku.

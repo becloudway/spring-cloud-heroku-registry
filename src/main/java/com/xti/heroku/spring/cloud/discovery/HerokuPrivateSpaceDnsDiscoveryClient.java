@@ -60,7 +60,7 @@ public class HerokuPrivateSpaceDnsDiscoveryClient implements DiscoveryClient {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        return null;
+        return serviceInstances;
     }
 
     /**
