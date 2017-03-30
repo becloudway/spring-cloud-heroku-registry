@@ -12,7 +12,7 @@ import java.util.Map;
 @RequestMapping("/spring-cloud-heroku-discovery")
 public class MetadataController {
 
-    private MetadataProvider metadataProvider = LocallyMutableMetadataProvider.getInstance();
+    private LocallyMutableMetadataProvider metadataProvider = LocallyMutableMetadataProvider.getInstance();
 
     private RestTemplate restTemplate = new RestTemplate();
 

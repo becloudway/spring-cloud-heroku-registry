@@ -1,6 +1,6 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
-import com.xti.spring.cloud.heroku.discovery.metadata.MetadataProvider;
+import com.xti.spring.cloud.heroku.discovery.metadata.RemoteMetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 import java.net.URI;
@@ -11,7 +11,7 @@ public class RemoteDynoProcessServiceInstance implements ServiceInstance {
     private String serviceId;
     private String host;
     private int port;
-    private MetadataProvider metadataProvider;
+    private RemoteMetadataProvider metadataProvider;
 
     /**
      * When creating a transient DynoProcessServiceInstance in the HerokuPrivateSpaceDnsDiscoveryClient the following
@@ -22,7 +22,7 @@ public class RemoteDynoProcessServiceInstance implements ServiceInstance {
      * @param port known by HerokuPrivateSpaceDnsDiscoveryClient by service string parsing.
      * @param metadataProvider provider used to get remote metadata with read only access.
      */
-    public RemoteDynoProcessServiceInstance(String serviceId, String host, int port, MetadataProvider metadataProvider) {
+    public RemoteDynoProcessServiceInstance(String serviceId, String host, int port, RemoteMetadataProvider metadataProvider) {
         this.serviceId = serviceId;
         this.host = host;
         this.port = port;
@@ -49,7 +49,6 @@ public class RemoteDynoProcessServiceInstance implements ServiceInstance {
         return URI.create("http://" + host + ":" + port);
     }
 
-    //TODO: store this in a database/cache or API exposed by instance itself? Shouldn't be that volatile on Heroku.
     public Map<String, String> getMetadata() {
         return metadataProvider.getMetadata(getUri());
     }

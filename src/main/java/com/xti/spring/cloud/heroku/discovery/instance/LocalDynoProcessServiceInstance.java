@@ -1,6 +1,6 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
-import com.xti.spring.cloud.heroku.discovery.metadata.MetadataProvider;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 import java.net.URI;
@@ -11,7 +11,7 @@ public class LocalDynoProcessServiceInstance implements ServiceInstance {
     private String serviceId;
     private String host;
     private int port;
-    private MetadataProvider metadataProvider;
+    private LocallyMutableMetadataProvider metadataProvider;
 
     /**
      * When creating a transient DynoProcessServiceInstance in the HerokuPrivateSpaceDnsDiscoveryClient the following
@@ -22,7 +22,7 @@ public class LocalDynoProcessServiceInstance implements ServiceInstance {
      * @param port known by HerokuPrivateSpaceDnsDiscoveryClient by service string parsing.
      * @param metadataProvider provider used to get local metadata with mutable access.
      */
-    public LocalDynoProcessServiceInstance(String serviceId, String host, int port, MetadataProvider metadataProvider) {
+    public LocalDynoProcessServiceInstance(String serviceId, String host, int port, LocallyMutableMetadataProvider metadataProvider) {
         this.serviceId = serviceId;
         this.host = host;
         this.port = port;

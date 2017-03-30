@@ -1,15 +1,16 @@
-package com.xti.spring.cloud.heroku.discovery;
+package com.xti.spring.cloud.heroku.discovery.instance;
 
-import com.xti.spring.cloud.heroku.discovery.instance.LocalDynoProcessServiceInstance;
-import com.xti.spring.cloud.heroku.discovery.instance.RemoteDynoProcessServiceInstance;
+import com.xti.spring.cloud.heroku.discovery.instance.port.ClusterPortNotFoundException;
+import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
+import com.xti.spring.cloud.heroku.discovery.metadata.RemoteMetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
 
 public class DynoProcessServiceInstanceBuilder {
 
     private boolean isLocal = false;
     private String host;
-    private int port = 8080;
+    private PortSelectorChain portSelectorChain;
     private String process;
     private String app;
 
@@ -26,8 +27,8 @@ public class DynoProcessServiceInstanceBuilder {
         return this;
     }
 
-    public DynoProcessServiceInstanceBuilder port(int port){
-        this.port = port;
+    public DynoProcessServiceInstanceBuilder portSelectorChain(PortSelectorChain portSelectorChain){
+        this.portSelectorChain = portSelectorChain;
         return this;
     }
 
@@ -59,13 +60,19 @@ public class DynoProcessServiceInstanceBuilder {
             final String[] herokuParts = herokuDnsFormationName.split("\\.");
             final String process = herokuParts[0];
             final String app = herokuParts[1];
-            final String portString = System.getenv("CLUSTER_PORT");
-            final int port = Integer.parseInt(portString);
             final String host = System.getenv("HEROKU_PRIVATE_IP");
 
-            return new LocalDynoProcessServiceInstance(process + "." + app, host, port, LocallyMutableMetadataProvider.getInstance());
+            try {
+                return new LocalDynoProcessServiceInstance(process + "." + app, host, portSelectorChain.getPort(), LocallyMutableMetadataProvider.getInstance());
+            } catch (ClusterPortNotFoundException e) {
+                throw new RuntimeException("Cluster Port not found", e);
+            }
         } else {
-            return new RemoteDynoProcessServiceInstance(process + "." + app, host, port, LocallyMutableMetadataProvider.getInstance());
+            try {
+                return new RemoteDynoProcessServiceInstance(process + "." + app, host, portSelectorChain.getPort(), new RemoteMetadataProvider());
+            } catch (ClusterPortNotFoundException e) {
+                throw new RuntimeException("Cluster Port not found", e);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LocallyMutableMetadataProvider implements MetadataProvider {
+public class LocallyMutableMetadataProvider {
 
     private Map<String, String> metadata;
     private RestTemplate restTemplate = new RestTemplate();

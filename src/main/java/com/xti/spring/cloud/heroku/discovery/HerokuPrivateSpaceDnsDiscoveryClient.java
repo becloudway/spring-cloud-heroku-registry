@@ -1,5 +1,8 @@
 package com.xti.spring.cloud.heroku.discovery;
 
+import com.xti.spring.cloud.heroku.discovery.instance.DynoProcessServiceInstanceBuilder;
+import com.xti.spring.cloud.heroku.discovery.instance.port.DefaultPortSelectorChain;
+import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuFormationNameServiceProvider;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuProcessServiceProvider;
 import org.springframework.cloud.client.ServiceInstance;
@@ -18,12 +21,14 @@ import java.util.Timer;
 public class HerokuPrivateSpaceDnsDiscoveryClient implements DiscoveryClient {
 
     private HerokuProcessServiceProvider serviceProvider;
+    private PortSelectorChain portSelectorChain;
     private Timer heartbeatTimer = new Timer();
 
     public HerokuPrivateSpaceDnsDiscoveryClient(ApplicationEventPublisher publisher) {
         java.security.Security.setProperty("networkaddress.cache.ttl", "0");
-        serviceProvider = new HerokuFormationNameServiceProvider();
-        heartbeatTimer.schedule(new HeartBeatTimerTask(publisher), 0, 10000);
+        this.serviceProvider = new HerokuFormationNameServiceProvider();
+        this.portSelectorChain = new DefaultPortSelectorChain();
+        this.heartbeatTimer.schedule(new HeartBeatTimerTask(publisher), 0, 10000);
     }
 
     public String description() {
@@ -35,7 +40,7 @@ public class HerokuPrivateSpaceDnsDiscoveryClient implements DiscoveryClient {
      * @return
      */
     public ServiceInstance getLocalServiceInstance() {
-        return new DynoProcessServiceInstanceBuilder().local(true).build();
+        return new DynoProcessServiceInstanceBuilder().portSelectorChain(portSelectorChain).local(true).build();
     }
 
     /**
@@ -53,7 +58,7 @@ public class HerokuPrivateSpaceDnsDiscoveryClient implements DiscoveryClient {
                 ServiceInstance remoteServiceInstance = new DynoProcessServiceInstanceBuilder()
                         .processApp(processApp)
                         .host(processAppHost.getHostAddress())
-                        .port(Integer.parseInt(System.getenv("CLUSTER_PORT")))
+                        .portSelectorChain(portSelectorChain)
                         .build();
                 serviceInstances.add(remoteServiceInstance);
             }
