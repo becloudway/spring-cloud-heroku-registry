@@ -5,13 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xt-i.heroku</groupId>
-    <artifactId>spring-cloud-heroku-registry</artifactId>
+    <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>spring-cloud-heroku-registry-discovery</module>
-        <module>spring-cloud-starter-heroku-registry-discovery</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.xt-i.heroku</groupId>
+            <artifactId>spring-cloud-heroku-registry-discovery</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>
