@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnProperty(value = "spring.cloud.heroku.discovery.enabled", matchIfMissing = true)
 @EnableConfigurationProperties
+@ComponentScan("com.xti.spring.cloud.heroku.discovery")
 public class HerokuDnsRegistryDiscoveryAutoConfiguration {
 
     @Bean

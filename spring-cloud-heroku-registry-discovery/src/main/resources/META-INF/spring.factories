@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xti.spring.cloud.heroku.discovery.HerokuDnsRegistryDiscoveryAutoConfiguration
+
+org.springframework.cloud.client.discovery.EnableDiscoveryClient=\
+com.xti.spring.cloud.heroku.discovery.HerokuDnsRegistryDiscoveryClient
