@@ -1,23 +1,23 @@
 package com.xti.spring.cloud.heroku.discovery.example;
 
 public class CreateNoteRequest {
-    private String id;
+    private Integer count;
     private String text;
 
     public CreateNoteRequest() {
     }
 
-    public CreateNoteRequest(String id, String text) {
-        this.id = id;
+    public CreateNoteRequest(Integer count, String text) {
+        this.count = count;
         this.text = text;
     }
 
-    public String getId() {
-        return id;
+    public Integer getCount() {
+        return count;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getText() {
