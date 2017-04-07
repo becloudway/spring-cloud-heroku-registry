@@ -28,8 +28,8 @@ addn-hosts=/etc/hosts.web.cloudapp.app.localspace
 ```
 
 #### Axon Framework SNAPSHOT
-Due to a bug in the latest release of Axon Framework install a 3.0.3-SNAPSHOT version of the axon framework in your local maven repository
-Clone the Axon Framework project from https://github.com/AxonFramework/AxonFramework and run mvn clean install.
+Due to a bug in the latest release of Axon Framework install a 3.0.3-SNAPSHOT version of the axon framework in your local maven repository.
+Clone the **axon-3.0.x** branch of the Axon Framework project from https://github.com/AxonFramework/AxonFramework and run mvn clean install.
 
 ## Run two simultaneous instances 
 
