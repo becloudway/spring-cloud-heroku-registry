@@ -4,8 +4,10 @@ Spring Cloud Discovery extension based on Heroku Private Spaces DNS Registry.
 
 More information about Heroku DNS registry: https://devcenter.heroku.com/articles/dyno-dns-registry
 
-## Example (run locally)
-Maven project with Axon framework 3.1.0-SNAPSHOT
+## Example
+Maven project demonstrating clustered behaviour together with Axon framework 3.0.3-SNAPSHOT.
+
+You can find the project under the example folder.
 
 ### Prerequisites:
 #### Additional loopback address
