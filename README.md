@@ -4,12 +4,30 @@ Spring Cloud Discovery extension based on Heroku Private Spaces DNS Registry.
 
 More information about Heroku DNS registry: https://devcenter.heroku.com/articles/dyno-dns-registry
 
+With the current implementation only dyno's within the same app can be clustered. Feel free to create an issue if you have ideas about how to know about other hosts ports on Heroku Private Spaces.
+
+## Usage
+Depend on the following spring starter dependency:
+
+    <dependency>
+        <groupId>com.xt-i</groupId>
+        <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
+        <version>0.1</version>
+    </dependency>
+    
+Use the following Spring annotations on your configuration class
+
+    @Configuration
+    @EnableDiscoveryClient
+    @EnableAutoConfiguration
+    public class YourConfigClass {
+
 ## Example
-Maven project demonstrating clustered behaviour together with Axon framework 3.0.3-SNAPSHOT.
+Maven project demonstrating clustered behaviour together with Axon framework 3.0.3.
 
-You can find the project under the example folder.
+You can find the example project in the example folder.
 
-### Prerequisites:
+### Prerequisites (Local Setup):
 #### Additional loopback address
 macOS:
 sudo ifconfig lo0 alias 127.0.0.2 up
@@ -26,12 +44,7 @@ addn-hosts=/etc/hosts.web.cloudapp.app.localspace
 127.0.0.1 web.cloudapp.app.localspace
 127.0.0.2 web.cloudapp.app.localspace
 ```
-
-#### Axon Framework SNAPSHOT
-Due to a bug in the latest release of Axon Framework install a 3.0.3-SNAPSHOT version of the axon framework in your local maven repository.
-Clone the **axon-3.0.x** branch of the Axon Framework project from https://github.com/AxonFramework/AxonFramework and run mvn clean install.
-
-## Run two simultaneous instances 
+### Run two simultaneous instances 
 
 In order to run the example locally set the following environment variables and system properties which are also available on Heroku:
 
