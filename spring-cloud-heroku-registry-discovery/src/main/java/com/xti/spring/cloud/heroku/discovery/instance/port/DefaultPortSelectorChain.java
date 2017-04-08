@@ -4,8 +4,8 @@ public class DefaultPortSelectorChain extends AbstractPortSelectorChain {
 
     public DefaultPortSelectorChain() {
         super(
-                new ServerPortSysPropPortSelecter(),
                 new SpringCloudHerokuPortEnvVarPortSelector(),
+                new ServerPortSysPropPortSelecter(),
                 new PortEnvVarPortSelector());
     }
 }
