@@ -6,7 +6,7 @@
 
     <groupId>com.xt-i</groupId>
     <artifactId>spring-cloud-heroku-registry-parent</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>pom</packaging>
 
     <name>Spring Cloud Heroku Registry Discovery</name>
@@ -25,6 +25,25 @@
         <developerConnection>scm:git:ssh://github.com/XT-i/spring-cloud-heroku-registry.git</developerConnection>
         <url>https://github.com/XT-i/spring-cloud-heroku-registry</url>
     </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <developers>
+        <developer>
+            <name>Michael Willemse</name>
+            <email>michael.willemse@xt-i.com</email>
+            <organization>XT-i</organization>
+            <organizationUrl>www.xt-i.com</organizationUrl>
+            <roles>
+                <role>Project Owner</role>
+            </roles>
+        </developer>
+    </developers>
 
     <modules>
         <module>spring-cloud-heroku-registry-discovery</module>
@@ -84,6 +103,17 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
