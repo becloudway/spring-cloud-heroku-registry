@@ -5,13 +5,76 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xt-i.heroku</groupId>
-    <artifactId>spring-cloud-heroku-registry</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>spring-cloud-heroku-registry-parent</artifactId>
+    <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <name>Spring Cloud Heroku Registry Discovery</name>
+    <description>Spring Cloud DiscoveryClient implementation running on Heroku Private Spaces DNS Registry.</description>
+    <url>https://github.com/XT-i/spring-cloud-heroku-discovery</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/XT-i/spring-cloud-heroku-registry.git</connection>
+        <developerConnection>scm:git:ssh://github.com/XT-i/spring-cloud-heroku-registry.git</developerConnection>
+        <url>https://github.com/XT-i/spring-cloud-heroku-registry</url>
+    </scm>
 
     <modules>
         <module>spring-cloud-heroku-registry-discovery</module>
         <module>spring-cloud-starter-heroku-registry-discovery</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc-jar</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
