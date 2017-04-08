@@ -1,4 +1,4 @@
-# spring-cloud-heroku-discovery
+# spring-cloud-heroku-discovery [![Build Status](https://travis-ci.org/XT-i/spring-cloud-heroku-discovery.svg?branch=master)](https://travis-ci.org/XT-i/spring-cloud-heroku-discovery)
 
 Spring Cloud Discovery extension based on Heroku Private Spaces DNS Registry.
 
