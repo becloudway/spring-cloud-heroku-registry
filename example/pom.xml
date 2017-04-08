@@ -10,13 +10,13 @@
         <version>1.5.2.RELEASE</version>
     </parent>
 
-    <groupId>com.xt-i.heroku</groupId>
+    <groupId>com.xt-i</groupId>
     <artifactId>spring-cloud-heroku-registry-discovery-example</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
-            <groupId>com.xt-i.heroku</groupId>
+            <groupId>com.xt-i</groupId>
             <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
