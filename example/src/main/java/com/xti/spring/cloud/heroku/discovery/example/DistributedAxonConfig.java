@@ -18,9 +18,7 @@ import org.axonframework.monitoring.NoOpMessageMonitor;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.springcloud.commandhandling.SpringCloudCommandRouter;
 import org.axonframework.springcloud.commandhandling.SpringHttpCommandBusConnector;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +29,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableDiscoveryClient
-@EnableAutoConfiguration
 public class DistributedAxonConfig {
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
 
     @Qualifier("localSegment")
     @Bean

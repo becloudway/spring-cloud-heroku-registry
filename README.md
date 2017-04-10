@@ -12,14 +12,13 @@ Depend on the following spring starter dependency:
     <dependency>
         <groupId>com.xt-i</groupId>
         <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
-        <version>0.1</version>
+        <version>0.1.1</version>
     </dependency>
     
 Use the following Spring annotations on your configuration class
 
     @Configuration
     @EnableDiscoveryClient
-    @EnableAutoConfiguration
     public class YourConfigClass {
 
 ## Example
