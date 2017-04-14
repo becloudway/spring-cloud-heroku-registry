@@ -24,7 +24,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
 
     @Override
     public void run() {
-        Path herokuFolder = Paths.get("/etc/heroku/space-topology.json");
+        Path herokuFolder = Paths.get("/etc/heroku");
 
         try(WatchService watchService = FileSystems.getDefault().newWatchService()){
 
