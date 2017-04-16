@@ -2,7 +2,7 @@ package com.xti.spring.cloud.heroku.discovery.process;
 
 import java.util.List;
 
-public class HerokuApiProcessServiceProvider implements HerokuProcessServiceProvider {
+public class HerokuApiProcessServiceProvider implements HerokuServiceProvider {
 
     /**
      * use heroku api

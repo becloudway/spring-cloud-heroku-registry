@@ -44,11 +44,11 @@ public class DynoProcessServiceInstanceBuilder {
 
     /**
      * Accepts combination of process and app
-     * @param processApp processName.appName
+     * @param appProcess processName.appName
      * @return DynoProcessServiceInstanceBuilder instance
      */
-    public DynoProcessServiceInstanceBuilder processApp(String processApp){
-        final String[] herokuParts = processApp.split("\\.");
+    public DynoProcessServiceInstanceBuilder appProcess(String appProcess){
+        final String[] herokuParts = appProcess.split("\\.");
         this.process = herokuParts[0];
         this.app = herokuParts[1];
         return this;

@@ -1,8 +1,10 @@
 package com.xti.spring.cloud.heroku.discovery.topology;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.Optional;
 
 public class HerokuSpaceTopologyApp {
 
@@ -32,6 +34,20 @@ public class HerokuSpaceTopologyApp {
     @JsonProperty("formation")
     public List<HerokuSpaceTopologyProcess> getFormation() {
         return formation;
+    }
+
+    @JsonIgnore
+    public String getAppName(){
+        if(this.getDomains() != null) {
+            Optional<String> appDomainOptional = this.getDomains().stream().filter(domain -> domain.endsWith(".herokuapp.com")).findFirst();
+
+            if (appDomainOptional.isPresent()) {
+                String appDomain = appDomainOptional.get();
+                return appDomain.substring(0, appDomain.indexOf(".herokuapp.com"));
+            }
+        }
+
+        return null;
     }
 
     @Override

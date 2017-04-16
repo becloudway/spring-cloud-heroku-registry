@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -25,8 +26,21 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
     @Override
     public void run() {
         Path herokuFolder = Paths.get("/etc/heroku");
+        Path spaceTopologyFile = herokuFolder.resolve("space-topology.json");
+
+        if(Files.exists(spaceTopologyFile)){
+            HerokuSpaceTopologyV1 herokuSpaceTopologyV1 = null;
+            try {
+                herokuSpaceTopologyV1 = objectMapper.readValue(spaceTopologyFile.toFile(), HerokuSpaceTopologyV1.class);
+                eventHandler.accept(herokuSpaceTopologyV1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         try(WatchService watchService = FileSystems.getDefault().newWatchService()){
+
+
 
             herokuFolder.register(watchService,
                     StandardWatchEventKinds.ENTRY_CREATE,

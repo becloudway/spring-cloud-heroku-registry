@@ -1,17 +1,11 @@
 package com.xti.spring.cloud.heroku.discovery;
 
-import com.xti.spring.cloud.heroku.discovery.instance.DynoProcessServiceInstanceBuilder;
-import com.xti.spring.cloud.heroku.discovery.instance.port.DefaultPortSelectorChain;
-import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
-import com.xti.spring.cloud.heroku.discovery.process.HerokuFormationNameServiceProvider;
-import com.xti.spring.cloud.heroku.discovery.process.HerokuProcessServiceProvider;
+import com.xti.spring.cloud.heroku.discovery.instance.HerokuInstanceProvider;
+import com.xti.spring.cloud.heroku.discovery.process.HerokuServiceProvider;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
@@ -20,14 +14,14 @@ import java.util.Timer;
  */
 public class HerokuDnsRegistryDiscoveryClient implements DiscoveryClient {
 
-    private HerokuProcessServiceProvider serviceProvider;
-    private PortSelectorChain portSelectorChain;
+    private HerokuServiceProvider serviceProvider;
+    private HerokuInstanceProvider instanceProvider;
     private Timer heartbeatTimer = new Timer();
 
-    public HerokuDnsRegistryDiscoveryClient(ApplicationEventPublisher publisher) {
+    public HerokuDnsRegistryDiscoveryClient(ApplicationEventPublisher publisher, HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
         java.security.Security.setProperty("networkaddress.cache.ttl", "0");
-        this.serviceProvider = new HerokuFormationNameServiceProvider();
-        this.portSelectorChain = new DefaultPortSelectorChain();
+        this.serviceProvider = herokuProcessServiceProvider;
+        this.instanceProvider = herokuInstanceProvider;
         this.heartbeatTimer.schedule(new HeartBeatTimerTask(publisher), 0, 10000);
     }
 
@@ -40,7 +34,7 @@ public class HerokuDnsRegistryDiscoveryClient implements DiscoveryClient {
      * @return
      */
     public ServiceInstance getLocalServiceInstance() {
-        return new DynoProcessServiceInstanceBuilder().portSelectorChain(portSelectorChain).local(true).build();
+        return instanceProvider.getLocalServiceInstance();
     }
 
     /**
@@ -50,22 +44,7 @@ public class HerokuDnsRegistryDiscoveryClient implements DiscoveryClient {
      * @return
      */
     public List<ServiceInstance> getInstances(String processApp) {
-        List<ServiceInstance> serviceInstances = new ArrayList<ServiceInstance>();
-        String roundRobinDomain = processApp + ".app.localspace";
-        try {
-            InetAddress[] processAppHosts = InetAddress.getAllByName(roundRobinDomain);
-            for (InetAddress processAppHost : processAppHosts) {
-                ServiceInstance remoteServiceInstance = new DynoProcessServiceInstanceBuilder()
-                        .processApp(processApp)
-                        .host(processAppHost.getHostAddress())
-                        .portSelectorChain(portSelectorChain)
-                        .build();
-                serviceInstances.add(remoteServiceInstance);
-            }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        return serviceInstances;
+        return instanceProvider.getServiceInstances(processApp);
     }
 
     /**

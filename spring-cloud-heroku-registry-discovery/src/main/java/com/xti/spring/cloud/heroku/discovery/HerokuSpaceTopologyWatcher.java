@@ -26,7 +26,7 @@ public class HerokuSpaceTopologyWatcher {
     public void init() {
         executorService = Executors.newSingleThreadExecutor();
         executorService.execute(new HerokuSpaceTopologyWatcherTask(t -> {
-            topology = t;
+            updateTopology(t);
             publisher.publishEvent(new HeartbeatEvent(this, t));
         }));
     }
@@ -37,7 +37,11 @@ public class HerokuSpaceTopologyWatcher {
     }
 
 
-    public HerokuSpaceTopologyV1 getTopology() {
+    public synchronized HerokuSpaceTopologyV1 getTopology() {
         return topology;
+    }
+
+    private synchronized void updateTopology(HerokuSpaceTopologyV1 topology) {
+        this.topology = topology;
     }
 }
