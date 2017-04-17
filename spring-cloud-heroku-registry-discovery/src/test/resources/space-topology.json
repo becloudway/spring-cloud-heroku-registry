@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "7ef41ec6-b4a9-4739-a646-fab8e08960a3",
+      "domains": [
+        "thawing-meadow-2738.powerful-retreat-1851.herokuspace.com",
+        "spring-cloud-heroku-registry.herokuapp.com"
+      ],
+      "formation": [
+        {
+          "id": "2634cd0e-b133-3713-ab7a-2618c6921422",
+          "process_type": "web",
+          "dynos": [
+            {
+              "id": "1e8d4e56-20bf-46f9-96b3-56a233a282f2",
+              "number": 2,
+              "private_ip": "10.0.130.56",
+              "hostname": "2.web.spring-cloud-heroku-registry.app.localspace",
+              "host_entry": "10.0.130.56 2.web.spring-cloud-heroku-registry.app.localspace web.spring-cloud-heroku-registry.app.localspace"
+            },
+            {
+              "id": "36e2baa2-ff2b-40cb-bbf8-f67da44fa5ef",
+              "number": 1,
+              "private_ip": "10.0.151.218",
+              "hostname": "1.web.spring-cloud-heroku-registry.app.localspace",
+              "host_entry": "10.0.151.218 1.web.spring-cloud-heroku-registry.app.localspace web.spring-cloud-heroku-registry.app.localspace"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

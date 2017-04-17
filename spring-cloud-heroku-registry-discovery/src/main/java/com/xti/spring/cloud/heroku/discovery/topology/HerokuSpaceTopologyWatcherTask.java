@@ -25,6 +25,9 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
 
     @Override
     public void run() {
+
+        System.out.println("Started watching /etc/heroku/space-topology.json");
+
         Path herokuFolder = Paths.get("/etc/heroku");
         Path spaceTopologyFile = herokuFolder.resolve("space-topology.json");
 
@@ -33,6 +36,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
             try {
                 herokuSpaceTopologyV1 = objectMapper.readValue(spaceTopologyFile.toFile(), HerokuSpaceTopologyV1.class);
                 eventHandler.accept(herokuSpaceTopologyV1);
+                System.out.println("Emitted topology event at start: " + herokuSpaceTopologyV1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -63,6 +67,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
                                 Path fullPath = herokuFolder.resolve(fileName);
                                 HerokuSpaceTopologyV1 herokuSpaceTopologyV1 = objectMapper.readValue(fullPath.toFile(), HerokuSpaceTopologyV1.class);
                                 eventHandler.accept(herokuSpaceTopologyV1);
+                                System.out.println("Emitted topology event: " + herokuSpaceTopologyV1);
 
                             } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
                                 eventHandler.accept(null);
