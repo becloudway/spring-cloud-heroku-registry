@@ -58,4 +58,25 @@ public class HerokuSpaceTopologyApp {
                 ", formation=" + formation +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HerokuSpaceTopologyApp that = (HerokuSpaceTopologyApp) o;
+
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (domains != null ? !domains.equals(that.domains) : that.domains != null) return false;
+        return !(formation != null ? !formation.equals(that.formation) : that.formation != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (domains != null ? domains.hashCode() : 0);
+        result = 31 * result + (formation != null ? formation.hashCode() : 0);
+        return result;
+    }
 }

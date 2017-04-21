@@ -27,6 +27,41 @@
               "host_entry": "10.0.151.218 1.web.spring-cloud-heroku-registry.app.localspace web.spring-cloud-heroku-registry.app.localspace"
             }
           ]
+        },
+        {
+          "id": "2634cd0e-b133-3713-ab7a-2618c6921422",
+          "process_type": "sideprocess",
+          "dynos": [
+            {
+              "id": "46e2baa2-ff2b-40cb-bbf8-f67da44fa5ef",
+              "number": 1,
+              "private_ip": "10.0.152.218",
+              "hostname": "1.sideprocess.spring-cloud-heroku-registry.app.localspace",
+              "host_entry": "10.0.152.218 1.sideprocess.spring-cloud-heroku-registry.app.localspace sideprocess.spring-cloud-heroku-registry.app.localspace"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6ef41ec6-b4a9-4739-a646-fab8e08960a3",
+      "domains": [
+        "thawing-river-2739.tiny-retreat-1850.herokuspace.com",
+        "tinyapp.herokuapp.com"
+      ],
+      "formation": [
+        {
+          "id": "3634cd0e-b133-3713-ab7a-2618c6921422",
+          "process_type": "web",
+          "dynos": [
+            {
+              "id": "56e2baa2-ff2b-40cb-bbf8-f67da44fa5ef",
+              "number": 1,
+              "private_ip": "10.0.152.218",
+              "hostname": "1.web.tinyapp.app.localspace",
+              "host_entry": "10.0.152.218 1.web.tinyapp.app.localspace web.tinyapp.app.localspace"
+            }
+          ]
         }
       ]
     }
