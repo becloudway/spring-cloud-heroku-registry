@@ -28,7 +28,7 @@ public class HerokuSpaceTopologyWatcher {
     @PostConstruct
     public void init() {
         executorService = Executors.newSingleThreadExecutor();
-        executorService.execute(new HerokuSpaceTopologyWatcherTask(1, this::updateTopology));
+        executorService.execute(new HerokuSpaceTopologyWatcherTask(1000, this::updateTopology));
     }
 
     @PreDestroy
