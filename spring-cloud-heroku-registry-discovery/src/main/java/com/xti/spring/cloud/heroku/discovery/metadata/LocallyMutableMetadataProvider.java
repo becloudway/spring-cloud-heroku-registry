@@ -31,7 +31,7 @@ public class LocallyMutableMetadataProvider {
 
     public Map<String, String> getMetadata(@NotNull URI instanceURI){
         try {
-            return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-discovery"), Map.class);
+            return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-metadata"), Map.class);
         } catch (Exception e) {
             return new HashMap<>();
         }

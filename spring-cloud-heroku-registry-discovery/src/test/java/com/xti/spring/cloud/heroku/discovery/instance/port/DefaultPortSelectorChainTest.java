@@ -24,34 +24,12 @@ public class DefaultPortSelectorChainTest {
     }
 
     @Test
-    public void serverPortSysPropPortTest() throws ClusterPortNotFoundException {
-        System.setProperty("server.port", "1112");
-        PortSelectorChain portSelectorChain = new DefaultPortSelectorChain();
-        assertThat(portSelectorChain.getPort()).isEqualTo(1112);
-    }
-
-    @Test
-    public void portEnvVarPortTest() throws ClusterPortNotFoundException {
-        environmentVariables.set("PORT", "1113");
-        PortSelectorChain portSelectorChain = new DefaultPortSelectorChain();
-        assertThat(portSelectorChain.getPort()).isEqualTo(1113);
-    }
-
-    @Test
     public void PortOrderPrioTest() throws ClusterPortNotFoundException {
         environmentVariables.set("SPRING_CLOUD_HEROKU_PORT", "1111");
         System.setProperty("server.port", "1112");
         environmentVariables.set("PORT", "1113");
         PortSelectorChain portSelectorChain = new DefaultPortSelectorChain();
         assertThat(portSelectorChain.getPort()).isEqualTo(1111);
-    }
-
-    @Test
-    public void portOrderPrio2Test() throws ClusterPortNotFoundException {
-        System.setProperty("server.port", "1112");
-        environmentVariables.set("PORT", "1113");
-        PortSelectorChain portSelectorChain = new DefaultPortSelectorChain();
-        assertThat(portSelectorChain.getPort()).isEqualTo(1112);
     }
 
     @Test

@@ -12,7 +12,7 @@ public class RemoteMetadataProvider {
 
     public Map<String, String> getMetadata(URI instanceURI) {
         try {
-            return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-discovery"), Map.class);
+            return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-metadata"), Map.class);
         } catch (Exception e) {
             return new HashMap<>();
         }

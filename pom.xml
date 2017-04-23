@@ -11,7 +11,7 @@
 
     <name>Spring Cloud Heroku Registry Discovery</name>
     <description>Spring Cloud DiscoveryClient implementation running on Heroku Private Spaces DNS Registry.</description>
-    <url>https://github.com/XT-i/spring-cloud-heroku-discovery</url>
+    <url>https://github.com/XT-i/spring-cloud-heroku-registry</url>
 
     <licenses>
         <license>

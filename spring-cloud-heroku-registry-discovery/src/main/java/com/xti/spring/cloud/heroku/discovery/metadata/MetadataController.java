@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/spring-cloud-heroku-discovery")
+@RequestMapping("/spring-cloud-heroku-metadata")
 public class MetadataController {
 
     private LocallyMutableMetadataProvider metadataProvider = LocallyMutableMetadataProvider.getInstance();
