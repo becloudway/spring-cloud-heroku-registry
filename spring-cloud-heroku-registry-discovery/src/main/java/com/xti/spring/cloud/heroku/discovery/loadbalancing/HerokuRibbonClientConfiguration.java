@@ -7,7 +7,7 @@ import com.netflix.config.ConfigurationManager;
 import com.netflix.config.DynamicPropertyFactory;
 import com.netflix.config.DynamicStringProperty;
 import com.netflix.loadbalancer.ServerList;
-import com.xti.spring.cloud.heroku.discovery.HerokuDnsRegistryDiscoveryClient;
+import com.xti.spring.cloud.heroku.discovery.HerokuDiscoveryClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -34,7 +34,7 @@ public class HerokuRibbonClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ServerList<?> ribbonServerList(HerokuDnsRegistryDiscoveryClient herokuDnsRegistryDiscoveryClient,
+    public ServerList<?> ribbonServerList(HerokuDiscoveryClient herokuDnsRegistryDiscoveryClient,
                                           IClientConfig config) {
         HerokuServerList herokuServerList = new HerokuServerList(herokuDnsRegistryDiscoveryClient);
         herokuServerList.initWithNiwsConfig(config);

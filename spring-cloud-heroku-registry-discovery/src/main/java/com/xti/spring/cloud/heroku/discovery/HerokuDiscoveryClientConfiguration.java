@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 @ConditionalOnProperty(value = "heroku.registry.discovery.enabled", matchIfMissing = true)
 @EnableConfigurationProperties
 @ComponentScan("com.xti.spring.cloud.heroku.discovery")
-public class HerokuDnsRegistryDiscoveryClientConfiguration {
+public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
@@ -43,8 +43,8 @@ public class HerokuDnsRegistryDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuDnsRegistryDiscoveryClient herokuDnsRegistryDiscoveryClient(ApplicationEventPublisher applicationEventPublisher, HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
-        return new HerokuDnsRegistryDiscoveryClient(applicationEventPublisher, herokuServiceProvider, herokuInstanceProvider);
+    public HerokuDiscoveryClient herokuDnsRegistryDiscoveryClient(ApplicationEventPublisher applicationEventPublisher, HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
+        return new HerokuDiscoveryClient(applicationEventPublisher, herokuServiceProvider, herokuInstanceProvider);
     }
 
     @Bean

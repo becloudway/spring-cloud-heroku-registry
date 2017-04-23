@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class RemoteMetadataProvider {
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
 
     public Map<String, String> getMetadata(URI instanceURI) {
         try {

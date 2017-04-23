@@ -12,13 +12,13 @@ import java.util.Timer;
 /**
  * Heroku Private Spaces DNS Registry based Spring Cloud DiscoveryClient implementation. Polls for changes every 10 seconds.
  */
-public class HerokuDnsRegistryDiscoveryClient implements DiscoveryClient {
+public class HerokuDiscoveryClient implements DiscoveryClient {
 
     private HerokuServiceProvider serviceProvider;
     private HerokuInstanceProvider instanceProvider;
     private Timer heartbeatTimer = new Timer();
 
-    public HerokuDnsRegistryDiscoveryClient(ApplicationEventPublisher publisher, HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
+    public HerokuDiscoveryClient(ApplicationEventPublisher publisher, HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
         java.security.Security.setProperty("networkaddress.cache.ttl", "0");
         this.serviceProvider = herokuProcessServiceProvider;
         this.instanceProvider = herokuInstanceProvider;

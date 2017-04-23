@@ -2,7 +2,6 @@ package com.xti.spring.cloud.heroku.discovery.metadata;
 
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +28,7 @@ public class LocallyMutableMetadataProvider {
         return metadata;
     }
 
-    public Map<String, String> getMetadata(@NotNull URI instanceURI){
+    public Map<String, String> getMetadata(URI instanceURI){
         try {
             return restTemplate.getForObject(instanceURI.resolve("/spring-cloud-heroku-metadata"), Map.class);
         } catch (Exception e) {

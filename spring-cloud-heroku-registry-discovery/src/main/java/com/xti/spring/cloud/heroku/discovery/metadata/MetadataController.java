@@ -14,8 +14,6 @@ public class MetadataController {
 
     private LocallyMutableMetadataProvider metadataProvider = LocallyMutableMetadataProvider.getInstance();
 
-    private RestTemplate restTemplate = new RestTemplate();
-
     @GetMapping()
     public @ResponseBody Map<String, String> getMetadata() {
         return metadataProvider.getMetadata();
