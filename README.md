@@ -1,10 +1,10 @@
 # spring-cloud-heroku-registry [![Build Status](https://travis-ci.org/XT-i/spring-cloud-heroku-registry.svg?branch=master)](https://travis-ci.org/XT-i/spring-cloud-heroku-registry)
 
-Spring Cloud Discovery extension based on Heroku Private Spaces DNS Registry.
+Spring Cloud Discovery extension based on Heroku Private Spaces Registry.
 
 More information about Heroku DNS registry: https://devcenter.heroku.com/articles/dyno-dns-registry
 
-With the current implementation only dyno's within the same app can be clustered. Feel free to create an issue if you have ideas about how to know about other hosts ports on Heroku Private Spaces.
+Service discovery is performed by depending on the /etc/heroku/space-topology.json file which is updated within 10 seconds of topology changes.
 
 ## Usage
 Depend on the following spring starter dependency:
