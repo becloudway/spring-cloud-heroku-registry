@@ -1,2 +1,2 @@
 org.springframework.cloud.client.discovery.EnableDiscoveryClient=\
-com.xti.spring.cloud.heroku.discovery.HerokuDnsRegistryDiscoveryClientConfiguration
+com.xti.spring.cloud.heroku.discovery.HerokuDiscoveryClientConfiguration
