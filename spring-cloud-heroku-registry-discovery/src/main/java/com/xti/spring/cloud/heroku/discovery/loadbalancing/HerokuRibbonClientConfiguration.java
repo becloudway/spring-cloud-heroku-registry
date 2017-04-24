@@ -34,9 +34,9 @@ public class HerokuRibbonClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public ServerList<?> ribbonServerList(HerokuDiscoveryClient herokuDnsRegistryDiscoveryClient,
+    public ServerList<?> ribbonServerList(HerokuDiscoveryClient herokuDiscoveryClient,
                                           IClientConfig config) {
-        HerokuServerList herokuServerList = new HerokuServerList(herokuDnsRegistryDiscoveryClient);
+        HerokuServerList herokuServerList = new HerokuServerList(herokuDiscoveryClient);
         herokuServerList.initWithNiwsConfig(config);
         return herokuServerList;
     }

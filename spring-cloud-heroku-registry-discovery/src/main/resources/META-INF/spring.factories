@@ -1,2 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xti.spring.cloud.heroku.discovery.loadbalancing.HerokuRibbonAutoConfiguration
+
 org.springframework.cloud.client.discovery.EnableDiscoveryClient=\
 com.xti.spring.cloud.heroku.discovery.HerokuDiscoveryClientConfiguration

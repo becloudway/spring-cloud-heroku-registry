@@ -19,4 +19,7 @@ import org.springframework.context.annotation.Configuration;
 @AutoConfigureAfter(RibbonAutoConfiguration.class)
 @RibbonClients(defaultConfiguration = HerokuRibbonClientConfiguration.class)
 public class HerokuRibbonAutoConfiguration {
+
+    public HerokuRibbonAutoConfiguration() {
+    }
 }

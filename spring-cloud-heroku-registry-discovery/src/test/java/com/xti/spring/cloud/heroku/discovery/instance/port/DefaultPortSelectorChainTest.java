@@ -6,7 +6,6 @@ import org.junit.contrib.java.lang.system.ClearSystemProperties;
 import org.junit.contrib.java.lang.system.EnvironmentVariables;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DefaultPortSelectorChainTest {
 
@@ -33,10 +32,8 @@ public class DefaultPortSelectorChainTest {
     }
 
     @Test
-    public void noPortTest() throws ClusterPortNotFoundException {
+    public void defaultPortTest() throws ClusterPortNotFoundException {
         PortSelectorChain portSelectorChain = new DefaultPortSelectorChain();
-        assertThatThrownBy(portSelectorChain::getPort)
-                .isInstanceOf(ClusterPortNotFoundException.class)
-                .hasMessage("no port found in PortSelectorChain");
+        assertThat(portSelectorChain.getPort()).isEqualTo(8080);
     }
 }

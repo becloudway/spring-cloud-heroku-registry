@@ -6,14 +6,12 @@ import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyV1;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyWatcherTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Component
 public class HerokuSpaceTopologyWatcher {
 
     private ExecutorService executorService;
