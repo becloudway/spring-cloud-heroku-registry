@@ -58,7 +58,6 @@ Depend on the following additional dependencies:
     
 Add @EnableAutoConfiguration annotation to the configuration to register beans used by Ribbon.
 Also register a @LoadBalanced RestTemplate bean.
-In order to send traffic over a known port on Heroku
 
     @Configuration
     @EnableDiscoveryClient
