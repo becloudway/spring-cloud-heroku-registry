@@ -15,11 +15,13 @@ public class MetadataFilter extends OncePerRequestFilter {
 
     public MetadataFilter(int internalPort) {
         this.internalPort = internalPort;
+        System.out.println("Metadata filter started at port: " + internalPort);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if(request.getServerPort() != internalPort){
+            System.out.println("Metadata filtered request from port: " + request.getServerPort());
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
         filterChain.doFilter(request, response);
