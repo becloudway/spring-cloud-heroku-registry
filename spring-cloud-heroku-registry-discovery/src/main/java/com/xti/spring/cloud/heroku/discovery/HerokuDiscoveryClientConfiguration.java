@@ -14,11 +14,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnProperty(value = "heroku.registry.discovery.enabled", matchIfMissing = true)
 @EnableConfigurationProperties
+@ComponentScan("com.xti.spring.cloud.heroku.discovery.metadata")
 public class HerokuDiscoveryClientConfiguration {
 
     @Bean
