@@ -1,4 +1,4 @@
-# spring-cloud-heroku-registry [![Build Status](https://travis-ci.org/XT-i/spring-cloud-heroku-registry.svg?branch=master)](https://travis-ci.org/XT-i/spring-cloud-heroku-registry)
+# spring-cloud-heroku-registry [![Build Status](https://travis-ci.org/XT-i/spring-cloud-heroku-registry.svg?branch=master)](https://travis-ci.org/XT-i/spring-cloud-heroku-registry) [![Quality Gate](https://sonarqube.com/api/badges/gate?key=com.xt-i:spring-cloud-heroku-registry-parent)](https://sonarqube.com/dashboard/index/com.xt-i:spring-cloud-heroku-registry-parent)
 
 Spring Cloud Discovery extension based on Heroku Private Spaces Registry.
 
