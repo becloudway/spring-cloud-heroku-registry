@@ -1,2 +1,19 @@
 language: java
 jdk: oraclejdk8
+cache:
+  directories:
+  - "$HOME/.m2/repository"
+  - "$HOME/.sonar/cache"
+addons:
+  sonarqube:
+    organization: cast-github
+  sonar:
+    token:
+      secure: npRD3LiHE+M68OFFbebPqdJcYoZwCxvrHk+r5ZbIo88CxpuddDCNWh8sAlMrkgiIiO6Fh+cFab8iwVfW88DTU0i1+Fe+jN7Eq3/xxxoDwL2zKtCzMt0Q68BpwPgVTkfjIwcf+8m6fYNqv191d2qXwswMQI8GiO5ucSegC2posBQlGtSluiD7SlLSwpw5wpItELcvut7SOsl/HicCZfjS3uXsZXlOdmq/TLY25TFnXvZdSChashOX387g2Y44/CCohR9OUacKebH7wcvYhoFfxhj2US5DdUkvJimu0lTUZxX6lIzFHCOtWViGo+FBA1PTQfzARQZaXD3wK7QItbG+jHWuk+2kP2jBblZD2PLjVRS1kCaI3Oj2NfxCOw1puI4TRgnXF8lmQv4i1aEqNpwQNyXuJ1Zx+GOlRlBUzmswkYD2JVf1vZ9MXBmSmCCB7tn9JtZKrjcrgCZqChJXVWhtCtxZ68A35GFCdpjVvfgU64NH/BBDKZiYBF6iLr5+D8QBZVyXW/JG6QkEfylUuLFoBJ/1rLKNkU4/TXjCatuo/+87GPZpdTnrXlr7y1NCINa/Z6FWMlAlBf4ZoYNERMll17cITDEKeCK9LLL5c1SdLYJyqOZOtiBN3STHT6bTcSOb8Wsw39E477WbOpnw/wZQJh5C4koZUw+VTA/876oQZAo=
+install:
+- mvn dependency:go-offline
+script:
+- mvn verify site sonar:sonar -Dmaven.test.failure.ignore=true
+env:
+  global:
+    secure: upjp4Iqpof5wUS9aufIdhHUJaNpdMdIzd/vZikiwIomx0RWl9wvYrba1zd/+8dUkmhEIuoq6BQbY6rlk46IYUWoQDROY4ZzG21nVZmQVMVxqostCrKtt/bfTcJ7zMs9ZQatHNSBkhL/eroo7QvtSC0ZrOY07yc7Xoiv2GmUbU9PDGIQGzcy86yU6YZlSHaGJCYgZUddq5HoFoGcTilVGBMiv5+FrLSeVHkl/5aGKELGNfEglTuGz1c1CEscSn5DRmYsU9v3RAdgQ2T3DUKm+/tjJ0EnU0GviOijV0LMFPy4YDGetmoQz0G3QG9AYsVlIDSgRw3yIWyK4muTGBWlqlOZzma3sZCjCz44eH8bMI5P6SQcQ5i6sntM0fDIFGIKrvJd0r15LMcfbg82rHmEkTDQeMxzCLsmP1GPdDhjfTQZih/QFPTUupm7992YvrBN5spPQijcAxcmbb3UYGWMN6jhcZPhAoCnxIcG62gsqDtZETFqPJX19SrJ+Rbq6oJCYWfyFIdNqdklTKeX2bs0zvHh/WfH6WWRYl+IOWCp9gB8NtdXn34CCkeE4Hvpoz2eGW6dOOzso2yCdREHSXJS6JO8L3Hoas9neHtm2Eln5RRHRRvfcCpp/mpwL+mOzIrzIm9joAknogfpDSQlkZ7Vx8Fep0T4S7uEuwkn6Y+tiANQ=

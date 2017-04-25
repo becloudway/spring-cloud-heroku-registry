@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Timer;
 
 /**
- * Heroku Private Spaces DNS Registry based Spring Cloud DiscoveryClient implementation. Polls for changes every 10 seconds.
+ * Heroku Private Spaces Registry based Spring Cloud DiscoveryClient implementation. Polls for changes every 10 seconds.
  */
 public class HerokuDiscoveryClient implements DiscoveryClient {
 
@@ -30,17 +30,16 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
     }
 
     /**
-     * Enough information should be retrievable by using Heroku DNS registry environment variables.
-     * @return
+     * Get current local service instance
+     * @return service instance with mutable metadata
      */
     public ServiceInstance getLocalServiceInstance() {
         return instanceProvider.getLocalServiceInstance();
     }
 
     /**
-     * getInstance returns all available host:port combinations for the given service.
-     * When service is in expected format dns nslookup can be performed using InetAddress.getAllByName(host)
-     * @param processApp expecting the following format: processname.appname:port
+     * getInstance returns all available host combinations for the given service.
+     * @param processApp expecting the following format: processname.appname
      * @return
      */
     public List<ServiceInstance> getInstances(String processApp) {
@@ -49,8 +48,6 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
 
     /**
      * Return names of Heroku processes: processname.appname
-     * TODO: Use Heroku Platform API "/formation"
-     * TODO: Investigate credentials to call Heroku API from Dyno's (always using api key?)
      * Limit to same process and app combination for now.
      * @return
      */
