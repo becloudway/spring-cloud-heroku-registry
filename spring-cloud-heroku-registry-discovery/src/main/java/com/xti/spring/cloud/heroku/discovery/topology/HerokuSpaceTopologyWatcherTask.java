@@ -53,7 +53,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
             } catch (InterruptedException e) {
                 log.warn("Space topology watcher interrupted.", e);
                 Thread.currentThread().interrupt();
-                throw new RuntimeException(e);
+                return;
             }
         }
     }
