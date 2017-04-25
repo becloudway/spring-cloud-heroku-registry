@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @EnableConfigurationProperties
 @ConditionalOnClass(IClient.class)
 @ConditionalOnBean(SpringClientFactory.class)
-@ConditionalOnProperty(value = "heroku.discovery.ribbon.enabled", matchIfMissing = true)
+@ConditionalOnProperty(value = "heroku.registry.ribbon.enabled", matchIfMissing = true)
 @AutoConfigureAfter(RibbonAutoConfiguration.class)
 @RibbonClients(defaultConfiguration = HerokuRibbonClientConfiguration.class)
 public class HerokuRibbonAutoConfiguration {

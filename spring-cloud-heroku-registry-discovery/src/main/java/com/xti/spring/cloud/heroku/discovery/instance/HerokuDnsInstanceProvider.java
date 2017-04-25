@@ -1,6 +1,8 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
 import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
 
 import java.net.InetAddress;
@@ -10,6 +12,8 @@ import java.util.List;
 
 public class HerokuDnsInstanceProvider implements HerokuInstanceProvider {
 
+    private static final Logger log = LoggerFactory.getLogger(HerokuDnsInstanceProvider.class);
+
     private PortSelectorChain portSelectorChain;
 
     public HerokuDnsInstanceProvider(PortSelectorChain portSelectorChain) {
@@ -18,7 +22,7 @@ public class HerokuDnsInstanceProvider implements HerokuInstanceProvider {
 
     @Override
     public List<ServiceInstance> getServiceInstances(String appProcess) {
-        List<ServiceInstance> serviceInstances = new ArrayList<ServiceInstance>();
+        List<ServiceInstance> serviceInstances = new ArrayList<>();
         String roundRobinDomain = appProcess + ".app.localspace";
         try {
             InetAddress[] processAppHosts = InetAddress.getAllByName(roundRobinDomain);
@@ -31,7 +35,7 @@ public class HerokuDnsInstanceProvider implements HerokuInstanceProvider {
                 serviceInstances.add(remoteServiceInstance);
             }
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            log.warn("Unknown Host exception when getting IP addresses for process.", e);
         }
         return serviceInstances;
     }

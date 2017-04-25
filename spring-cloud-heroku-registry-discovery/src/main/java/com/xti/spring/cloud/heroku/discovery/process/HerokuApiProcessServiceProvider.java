@@ -5,7 +5,7 @@ import java.util.List;
 public class HerokuApiProcessServiceProvider implements HerokuServiceProvider {
 
     /**
-     * use heroku api
+     * use Heroku api
      */
     public List<String> getProcesses() {
         return null;
