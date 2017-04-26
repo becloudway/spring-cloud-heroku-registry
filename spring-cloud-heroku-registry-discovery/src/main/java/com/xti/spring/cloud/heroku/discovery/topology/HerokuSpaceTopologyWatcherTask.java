@@ -41,7 +41,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
                     HerokuSpaceTopologyV1 newSpaceTopology = objectMapper.readValue(spaceTopologyFile.toFile(), HerokuSpaceTopologyV1.class);
                     if(!Objects.equals(storedSpaceTopology, newSpaceTopology)){
                         eventHandler.accept(newSpaceTopology);
-                        log.debug("Emitted topology event : " + newSpaceTopology);
+                        log.debug("Emitted topology event:\n{}", newSpaceTopology);
                     }
                     storedSpaceTopology = newSpaceTopology;
                 } catch (IOException e) {

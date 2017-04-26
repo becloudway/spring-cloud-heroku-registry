@@ -1,16 +1,11 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
 import com.xti.spring.cloud.heroku.discovery.metadata.RemoteMetadataProvider;
-import org.springframework.cloud.client.ServiceInstance;
 
-import java.net.URI;
 import java.util.Map;
 
-public class RemoteDynoProcessServiceInstance implements ServiceInstance {
+public class RemoteDynoProcessServiceInstance extends AbstractDynoProcessServiceInstance {
 
-    private String serviceId;
-    private String host;
-    private int port;
     private RemoteMetadataProvider metadataProvider;
 
     /**
@@ -23,30 +18,8 @@ public class RemoteDynoProcessServiceInstance implements ServiceInstance {
      * @param metadataProvider provider used to get remote metadata with read only access.
      */
     public RemoteDynoProcessServiceInstance(String serviceId, String host, int port, RemoteMetadataProvider metadataProvider) {
-        this.serviceId = serviceId;
-        this.host = host;
-        this.port = port;
+        super(serviceId, host, port);
         this.metadataProvider = metadataProvider;
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public boolean isSecure() {
-        return false;
-    }
-
-    public URI getUri() {
-        return URI.create("http://" + host + ":" + port);
     }
 
     public Map<String, String> getMetadata() {
