@@ -16,7 +16,7 @@ public abstract class AbstractPortSelectorChain implements PortSelectorChain {
     }
 
     @Override
-    public int getPort() throws ClusterPortNotFoundException {
+    public int getPort() {
         for (PortSelector portSelector : portSelectors) {
             Integer port = portSelector.getPort();
             if(port != null){

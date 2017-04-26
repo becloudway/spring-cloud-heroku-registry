@@ -12,15 +12,6 @@ public class HerokuSpaceTopologyApp {
     private List<String> domains;
     private List<HerokuSpaceTopologyProcess> formation;
 
-    public HerokuSpaceTopologyApp() {
-    }
-
-    public HerokuSpaceTopologyApp(String id, List<String> domains, List<HerokuSpaceTopologyProcess> formation) {
-        this.id = id;
-        this.domains = domains;
-        this.formation = formation;
-    }
-
     @JsonProperty("id")
     public String getId() {
         return id;

@@ -10,17 +10,6 @@ public class HerokuSpaceTopologyDyno {
     private String hostname;
     private String hostEntry;
 
-    public HerokuSpaceTopologyDyno() {
-    }
-
-    public HerokuSpaceTopologyDyno(String id, Integer number, String privateIp, String hostname, String hostEntry) {
-        this.id = id;
-        this.number = number;
-        this.privateIp = privateIp;
-        this.hostname = hostname;
-        this.hostEntry = hostEntry;
-    }
-
     @JsonProperty("id")
     public String getId() {
         return id;
