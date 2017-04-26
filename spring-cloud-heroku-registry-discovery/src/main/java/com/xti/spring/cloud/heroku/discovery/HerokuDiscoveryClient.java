@@ -30,7 +30,7 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
     }
 
     public String description() {
-        return "Discovery Client facilitated by Heroku Private Spaces Dyno DNS Registry";
+        return "Discovery Client facilitated by Heroku Private Spaces Dyno Registry.";
     }
 
     /**

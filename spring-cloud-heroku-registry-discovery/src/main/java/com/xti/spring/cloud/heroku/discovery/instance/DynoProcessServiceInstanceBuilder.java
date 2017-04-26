@@ -49,8 +49,8 @@ public class DynoProcessServiceInstanceBuilder {
      */
     public DynoProcessServiceInstanceBuilder appProcess(String appProcess){
         final String[] herokuParts = appProcess.split("\\.");
-        this.process = herokuParts[0];
-        this.app = herokuParts[1];
+        process(herokuParts[0]);
+        app(herokuParts[1]);
         return this;
     }
 
