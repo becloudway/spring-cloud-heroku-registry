@@ -43,7 +43,7 @@ public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuDiscoveryClient herokuDnsRegistryDiscoveryClient(ApplicationEventPublisher applicationEventPublisher, HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
+    public HerokuDiscoveryClient herokuDiscoveryClient(ApplicationEventPublisher applicationEventPublisher, HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
         return new HerokuDiscoveryClient(applicationEventPublisher, herokuServiceProvider, herokuInstanceProvider);
     }
 

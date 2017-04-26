@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = TestSpringConfiguration.class)
-public class SpringTest {
+@ContextConfiguration(classes = TestSpringLoadBalancedConfiguration.class)
+public class SpringLoadBalancedTest {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -21,8 +21,8 @@ public class SpringTest {
     @Test
     public void testContext(){
         String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
-        assertThat(beanDefinitionNames)
-                .contains("herokuDiscoveryClient")
-                .doesNotContain("com.xti.spring.cloud.heroku.discovery.loadbalancing.HerokuRibbonAutoConfiguration");
+        assertThat(beanDefinitionNames).contains(
+                "herokuDiscoveryClient",
+                "com.xti.spring.cloud.heroku.discovery.loadbalancing.HerokuRibbonAutoConfiguration");
     }
 }

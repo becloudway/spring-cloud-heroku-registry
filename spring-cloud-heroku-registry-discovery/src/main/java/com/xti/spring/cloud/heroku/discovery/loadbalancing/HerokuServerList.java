@@ -2,8 +2,8 @@ package com.xti.spring.cloud.heroku.discovery.loadbalancing;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.AbstractServerList;
-import com.xti.spring.cloud.heroku.discovery.HerokuDiscoveryClient;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,9 +12,9 @@ public class HerokuServerList extends AbstractServerList<HerokuServer> {
 
     protected String serviceId;
 
-    HerokuDiscoveryClient discoveryClient;
+    DiscoveryClient discoveryClient;
 
-    public HerokuServerList(HerokuDiscoveryClient discoveryClient) {
+    public HerokuServerList(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;
     }
 
