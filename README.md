@@ -92,7 +92,7 @@ Use the @LoadBalanced RestTemplate bean where necessary by using {processName}.{
         private RestTemplate restTemplate;
         
         public void call(){
-            return restTemplate.getForObject("http://processname.herokuapp/api/hello", String.class);
+            restTemplate.getForObject("http://processname.herokuapp/api/hello", String.class);
         }
     }
 

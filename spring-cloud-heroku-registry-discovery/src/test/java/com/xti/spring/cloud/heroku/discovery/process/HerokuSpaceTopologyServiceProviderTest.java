@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class HerokuSpaceTopologyServiceProviderTest {
 
     @Mock
-    HerokuSpaceTopologyWatcher watcher;
+    private HerokuSpaceTopologyWatcher watcher;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();

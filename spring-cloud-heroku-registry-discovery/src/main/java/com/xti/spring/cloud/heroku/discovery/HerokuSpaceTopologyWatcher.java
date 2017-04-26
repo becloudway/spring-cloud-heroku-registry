@@ -1,11 +1,7 @@
 package com.xti.spring.cloud.heroku.discovery;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyV1;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyWatcherTask;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -17,11 +13,6 @@ public class HerokuSpaceTopologyWatcher {
     private ExecutorService executorService;
 
     private HerokuSpaceTopologyV1 topology = null;
-
-    @Autowired
-    private ApplicationEventPublisher publisher;
-
-    private ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false);
 
     @PostConstruct
     public void init() {

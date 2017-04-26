@@ -56,29 +56,4 @@ public class HerokuSpaceTopologyDyno {
                 ", hostEntry='" + hostEntry + '\'' +
                 '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        HerokuSpaceTopologyDyno that = (HerokuSpaceTopologyDyno) o;
-
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (number != null ? !number.equals(that.number) : that.number != null) return false;
-        if (privateIp != null ? !privateIp.equals(that.privateIp) : that.privateIp != null) return false;
-        if (hostname != null ? !hostname.equals(that.hostname) : that.hostname != null) return false;
-        return !(hostEntry != null ? !hostEntry.equals(that.hostEntry) : that.hostEntry != null);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (number != null ? number.hashCode() : 0);
-        result = 31 * result + (privateIp != null ? privateIp.hashCode() : 0);
-        result = 31 * result + (hostname != null ? hostname.hashCode() : 0);
-        result = 31 * result + (hostEntry != null ? hostEntry.hashCode() : 0);
-        return result;
-    }
 }
