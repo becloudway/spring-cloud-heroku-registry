@@ -2,9 +2,7 @@ package com.xti.spring.cloud.heroku.discovery.instance;
 
 import com.xti.spring.cloud.heroku.discovery.HerokuSpaceTopologyWatcher;
 import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
-import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyApp;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyDyno;
-import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyProcess;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyV1;
 import org.springframework.cloud.client.ServiceInstance;
 
@@ -34,13 +32,11 @@ public class HerokuSpaceTopologyInstanceProvider implements HerokuInstanceProvid
         HerokuSpaceTopologyV1 topology = watcher.getTopology();
 
         if(topology != null){
-            for (HerokuSpaceTopologyApp app : topology.getApps()) {
-
-                if(Objects.equals(app.getAppName(), appName)){
-                    for (HerokuSpaceTopologyProcess process : app.getFormation()) {
-
-                        if(Objects.equals(process.getProcessType(), processName)){
-                            for (HerokuSpaceTopologyDyno dyno : process.getDynos()) {
+            topology.getApps().stream()
+                    .filter(app -> Objects.equals(app.getAppName(), appName))
+                    .forEach(app -> app.getFormation().stream()
+                            .filter(process -> Objects.equals(process.getProcessType(), processName))
+                            .forEach(process -> {for (HerokuSpaceTopologyDyno dyno : process.getDynos()) {
                                 ServiceInstance remoteServiceInstance = new DynoProcessServiceInstanceBuilder()
                                         .appProcess(appProcess)
                                         .host(dyno.getPrivateIp())
@@ -48,10 +44,8 @@ public class HerokuSpaceTopologyInstanceProvider implements HerokuInstanceProvid
                                         .build();
                                 serviceInstances.add(remoteServiceInstance);
                             }
-                        }
-                    }
-                }
-            }
+                            }
+                            ));
         }
 
         return serviceInstances;

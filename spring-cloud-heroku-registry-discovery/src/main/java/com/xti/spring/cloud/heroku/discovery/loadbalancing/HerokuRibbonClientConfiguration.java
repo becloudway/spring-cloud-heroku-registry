@@ -29,9 +29,6 @@ public class HerokuRibbonClientConfiguration {
     @Value("${ribbon.client.name}")
     private String serviceId;
 
-    public HerokuRibbonClientConfiguration() {
-    }
-
     @Bean
     @ConditionalOnMissingBean
     public ServerList<?> ribbonServerList(HerokuDiscoveryClient herokuDiscoveryClient,

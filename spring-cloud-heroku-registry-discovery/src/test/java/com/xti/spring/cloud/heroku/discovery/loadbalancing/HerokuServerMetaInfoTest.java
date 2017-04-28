@@ -28,4 +28,12 @@ public class HerokuServerMetaInfoTest {
     public void testGetInstanceId() throws Exception {
         assertThat(metaInfo.getInstanceId()).isEqualTo(serviceId);
     }
+
+    @Test
+    public void testEquals() throws Exception {
+        HerokuServerMetaInfo metaInfo2 = new HerokuServerMetaInfo("web.app");
+        assertThat(metaInfo).isEqualTo(metaInfo2);
+        assertThat(metaInfo).isEqualTo(metaInfo);
+        assertThat(metaInfo).isNotEqualTo(null);
+    }
 }

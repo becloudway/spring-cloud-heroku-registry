@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
@@ -36,7 +35,7 @@ public class HerokuSpaceTopologyWatcherTask implements Runnable {
         Path spaceTopologyFile = herokuFolder.resolve("space-topology.json");
 
         while (true){
-            if(Files.exists(spaceTopologyFile)){
+            if(spaceTopologyFile.toFile().exists()){
                 try {
                     HerokuSpaceTopologyV1 newSpaceTopology = objectMapper.readValue(spaceTopologyFile.toFile(), HerokuSpaceTopologyV1.class);
                     if(!Objects.equals(storedSpaceTopology, newSpaceTopology)){
