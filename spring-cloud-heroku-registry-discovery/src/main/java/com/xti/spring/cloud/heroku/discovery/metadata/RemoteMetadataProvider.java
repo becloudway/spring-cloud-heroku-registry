@@ -15,13 +15,18 @@ public class RemoteMetadataProvider {
 
     private static final Logger log = LoggerFactory.getLogger(RemoteMetadataProvider.class);
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
+
+    public RemoteMetadataProvider(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public Map<String, String> getMetadata(URI instanceURI){
         try {
             ResponseEntity<Map<String, String>> exchange = restTemplate.exchange(
                     instanceURI.resolve("/spring-cloud-heroku-metadata"),
-                    HttpMethod.GET, null,
+                    HttpMethod.GET,
+                    null,
                     new ParameterizedTypeReference<Map<String, String>>() {});
             return exchange.getBody();
         } catch (Exception e) {

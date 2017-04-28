@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,8 +36,8 @@ public class HerokuServerListTest {
     @Before
     public void initObjects(){
         List<ServiceInstance> serviceInstances = new ArrayList<>();
-        serviceInstances.add(new RemoteDynoProcessServiceInstance("web.app", "10.10.10.11", 8080, new RemoteMetadataProvider()));
-        serviceInstances.add(new RemoteDynoProcessServiceInstance("web.app", "10.10.10.12", 8080, new RemoteMetadataProvider()));
+        serviceInstances.add(new RemoteDynoProcessServiceInstance("web.app", "10.10.10.11", 8080, new RemoteMetadataProvider(new RestTemplate())));
+        serviceInstances.add(new RemoteDynoProcessServiceInstance("web.app", "10.10.10.12", 8080, new RemoteMetadataProvider(new RestTemplate())));
         when(discoveryClient.getServices()).thenReturn(Collections.singletonList("web.app"));
         when(discoveryClient.getInstances("web.app")).thenReturn(serviceInstances);
         when(iClientConfig.getClientName()).thenReturn("web.app");

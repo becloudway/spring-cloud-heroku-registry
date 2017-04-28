@@ -10,27 +10,7 @@ public class HerokuServer extends Server {
     HerokuServer(ServiceInstance serviceInstance){
         super(serviceInstance.getHost(), serviceInstance.getPort());
 
-        this.metaInfo = new MetaInfo() {
-            @Override
-            public String getAppName() {
-                return serviceInstance.getServiceId();
-            }
-
-            @Override
-            public String getServerGroup() {
-                return null;
-            }
-
-            @Override
-            public String getServiceIdForDiscovery() {
-                return serviceInstance.getServiceId();
-            }
-
-            @Override
-            public String getInstanceId() {
-                return serviceInstance.getServiceId();
-            }
-        };
+        this.metaInfo = new HerokuServerMetaInfo(serviceInstance.getServiceId());
     }
 
     @Override

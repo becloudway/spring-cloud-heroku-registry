@@ -4,6 +4,7 @@ import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import com.xti.spring.cloud.heroku.discovery.metadata.RemoteMetadataProvider;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.web.client.RestTemplate;
 
 public class DynoProcessServiceInstanceBuilder {
 
@@ -61,7 +62,7 @@ public class DynoProcessServiceInstanceBuilder {
             return new LocalDynoProcessServiceInstance(localProcess + "." + localApp, localHost, portSelectorChain.getPort(), LocallyMutableMetadataProvider.getInstance());
 
         } else {
-            return new RemoteDynoProcessServiceInstance(process + "." + app, host, portSelectorChain.getPort(), new RemoteMetadataProvider());
+            return new RemoteDynoProcessServiceInstance(process + "." + app, host, portSelectorChain.getPort(), new RemoteMetadataProvider(new RestTemplate()));
         }
     }
 }
