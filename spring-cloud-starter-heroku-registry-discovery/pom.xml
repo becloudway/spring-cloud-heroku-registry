@@ -7,10 +7,10 @@
     <parent>
         <groupId>com.xt-i</groupId>
         <artifactId>spring-cloud-heroku-registry-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
 </project>
