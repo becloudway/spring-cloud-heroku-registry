@@ -42,7 +42,7 @@ By default a filter will run causing the /spring-cloud-heroku-metadata endpoint 
         }
     }
     
-### Configuration with client loadbalancing support (RestTemplate with Ribbon) - From 1.0.0 (available soon)
+### Configuration with client loadbalancing support (RestTemplate with Ribbon)
 
 Depend on the following additional dependencies:
 
