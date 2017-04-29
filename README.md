@@ -32,6 +32,7 @@ By default a filter will run causing the /spring-cloud-heroku-metadata endpoint 
         @Value("${SPRING_CLOUD_HEROKU_PORT:8080}")
         private String springCloudHerokuPort;
     
+        @Bean
         public EmbeddedServletContainerFactory servletContainer() {
             TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
             Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
@@ -67,6 +68,7 @@ Also register a @LoadBalanced RestTemplate bean.
         @Value("${SPRING_CLOUD_HEROKU_PORT:8080}")
         private String springCloudHerokuPort;
     
+        @Bean
         public EmbeddedServletContainerFactory servletContainer() {
             TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
             Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");

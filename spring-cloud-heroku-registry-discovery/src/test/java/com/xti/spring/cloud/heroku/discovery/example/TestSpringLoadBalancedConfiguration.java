@@ -17,6 +17,7 @@ public class TestSpringLoadBalancedConfiguration {
 
     private String springCloudHerokuPort = "8081";
 
+    @Bean
     public EmbeddedServletContainerFactory servletContainer() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
