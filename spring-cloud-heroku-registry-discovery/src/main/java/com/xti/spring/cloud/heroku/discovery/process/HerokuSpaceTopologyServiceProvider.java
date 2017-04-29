@@ -1,6 +1,6 @@
 package com.xti.spring.cloud.heroku.discovery.process;
 
-import com.xti.spring.cloud.heroku.discovery.HerokuSpaceTopologyWatcher;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyListener;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyApp;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyProcess;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyV1;
@@ -10,15 +10,15 @@ import java.util.List;
 
 public class HerokuSpaceTopologyServiceProvider implements HerokuServiceProvider {
 
-    private HerokuSpaceTopologyWatcher watcher;
+    private HerokuSpaceTopologyListener listener;
 
-    public HerokuSpaceTopologyServiceProvider(HerokuSpaceTopologyWatcher watcher) {
-        this.watcher = watcher;
+    public HerokuSpaceTopologyServiceProvider(HerokuSpaceTopologyListener listener) {
+        this.listener = listener;
     }
 
     @Override
     public List<String> getProcesses() {
-        HerokuSpaceTopologyV1 topology = watcher.getTopology();
+        HerokuSpaceTopologyV1 topology = listener.getTopology();
         List<String> processes = new ArrayList<>();
 
         if(topology != null){

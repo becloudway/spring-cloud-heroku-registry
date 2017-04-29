@@ -1,6 +1,6 @@
 package com.xti.spring.cloud.heroku.discovery.process;
 
-import com.xti.spring.cloud.heroku.discovery.HerokuSpaceTopologyWatcher;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyPoller;
 import com.xti.spring.cloud.heroku.discovery.SpaceTopologyLoader;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 public class HerokuSpaceTopologyServiceProviderTest {
 
     @Mock
-    private HerokuSpaceTopologyWatcher watcher;
+    private HerokuSpaceTopologyPoller watcher;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();

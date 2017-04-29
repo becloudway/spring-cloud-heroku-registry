@@ -3,6 +3,7 @@ package com.xti.spring.cloud.heroku.discovery;
 import com.xti.spring.cloud.heroku.discovery.instance.HerokuSpaceTopologyInstanceProvider;
 import com.xti.spring.cloud.heroku.discovery.instance.port.DefaultPortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuSpaceTopologyServiceProvider;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyPoller;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,7 +25,7 @@ import static org.mockito.Mockito.when;
 public class HerokuDiscoveryClientTest {
 
     @Mock
-    private HerokuSpaceTopologyWatcher watcher;
+    private HerokuSpaceTopologyPoller watcher;
 
     @Mock
     private ApplicationEventPublisher applicationEventPublisher;
@@ -44,7 +45,6 @@ public class HerokuDiscoveryClientTest {
         environmentVariables.set("HEROKU_PRIVATE_IP", "10.0.151.218");
         when(watcher.getTopology()).thenReturn(SpaceTopologyLoader.getTopology("/space-topology.json"));
         discoveryClient = new HerokuDiscoveryClient(
-                applicationEventPublisher,
                 new HerokuSpaceTopologyServiceProvider(watcher),
                 new HerokuSpaceTopologyInstanceProvider(new DefaultPortSelectorChain(), watcher));
     }

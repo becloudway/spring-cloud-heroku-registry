@@ -2,7 +2,7 @@ package com.xti.spring.cloud.heroku.discovery.instance;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xti.spring.cloud.heroku.discovery.HerokuSpaceTopologyWatcher;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyPoller;
 import com.xti.spring.cloud.heroku.discovery.SpaceTopologyLoader;
 import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
 import org.junit.Rule;
@@ -23,7 +23,7 @@ public class HerokuSpaceTopologyInstanceProviderTest {
     PortSelectorChain portSelectorChain;
 
     @Mock
-    HerokuSpaceTopologyWatcher watcher;
+    HerokuSpaceTopologyPoller watcher;
 
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();

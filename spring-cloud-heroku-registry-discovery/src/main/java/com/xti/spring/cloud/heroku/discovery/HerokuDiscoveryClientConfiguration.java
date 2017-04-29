@@ -8,6 +8,8 @@ import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.metadata.MetadataFilter;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuServiceProvider;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuSpaceTopologyServiceProvider;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyListener;
+import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyWatcher;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -25,8 +27,8 @@ public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuServiceProvider getHerokuServiceProvider(HerokuSpaceTopologyWatcher watcher){
-        return new HerokuSpaceTopologyServiceProvider(watcher);
+    public HerokuServiceProvider getHerokuServiceProvider(HerokuSpaceTopologyListener listener){
+        return new HerokuSpaceTopologyServiceProvider(listener);
     }
 
     @Bean
@@ -37,14 +39,14 @@ public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuInstanceProvider getHerokuInstanceProvider(HerokuSpaceTopologyWatcher watcher, PortSelectorChain portSelectorChain){
-        return new HerokuSpaceTopologyInstanceProvider(portSelectorChain, watcher);
+    public HerokuInstanceProvider getHerokuInstanceProvider(HerokuSpaceTopologyListener listener, PortSelectorChain portSelectorChain){
+        return new HerokuSpaceTopologyInstanceProvider(portSelectorChain, listener);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuDiscoveryClient herokuDiscoveryClient(ApplicationEventPublisher applicationEventPublisher, HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
-        return new HerokuDiscoveryClient(applicationEventPublisher, herokuServiceProvider, herokuInstanceProvider);
+    public HerokuDiscoveryClient herokuDiscoveryClient(HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
+        return new HerokuDiscoveryClient(herokuServiceProvider, herokuInstanceProvider);
     }
 
     @Bean
@@ -70,7 +72,7 @@ public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuSpaceTopologyWatcher watcher(){
-        return new HerokuSpaceTopologyWatcher();
+    public HerokuSpaceTopologyListener watcher(ApplicationEventPublisher applicationEventPublisher){
+        return new HerokuSpaceTopologyWatcher("/etc/heroku/space-topology.v1.json", applicationEventPublisher);
     }
 }

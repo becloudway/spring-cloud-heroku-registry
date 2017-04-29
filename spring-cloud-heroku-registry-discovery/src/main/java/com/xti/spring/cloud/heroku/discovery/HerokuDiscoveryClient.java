@@ -6,10 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.context.ApplicationEventPublisher;
 
 import java.util.List;
-import java.util.Timer;
 
 /**
  * Heroku Private Spaces Registry based Spring Cloud DiscoveryClient implementation. Polls for changes every 10 seconds.
@@ -20,12 +18,10 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
 
     private HerokuServiceProvider serviceProvider;
     private HerokuInstanceProvider instanceProvider;
-    private Timer heartbeatTimer = new Timer();
 
-    public HerokuDiscoveryClient(ApplicationEventPublisher publisher, HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
+    public HerokuDiscoveryClient(HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
         this.serviceProvider = herokuProcessServiceProvider;
         this.instanceProvider = herokuInstanceProvider;
-        this.heartbeatTimer.schedule(new HeartBeatTimerTask(publisher), 0, 10000);
         log.info("Started HerokuDiscoveryClient.");
     }
 
