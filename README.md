@@ -12,7 +12,7 @@ Depend on the following spring starter dependency:
     <dependency>
         <groupId>com.xt-i</groupId>
         <artifactId>spring-cloud-starter-heroku-registry-discovery</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
     
 Use a standard Heroku Java Procfile
