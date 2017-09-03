@@ -6,7 +6,7 @@
 
     <groupId>com.xt-i</groupId>
     <artifactId>spring-cloud-heroku-registry-parent</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Spring Cloud Heroku Registry Discovery</name>
@@ -65,6 +65,13 @@
                 <version>${spring-cloud-netflix.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- project dependencies -->
+            <dependency>
+                <groupId>com.xt-i</groupId>
+                <artifactId>spring-cloud-heroku-registry-discovery</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

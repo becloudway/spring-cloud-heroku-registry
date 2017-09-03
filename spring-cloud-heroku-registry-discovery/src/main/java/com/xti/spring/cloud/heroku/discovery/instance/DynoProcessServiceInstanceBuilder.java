@@ -8,14 +8,14 @@ import org.springframework.web.client.RestTemplate;
 
 public class DynoProcessServiceInstanceBuilder {
 
-    private boolean isLocal = false;
+    private LocallyMutableMetadataProvider locallyMutableMetadataProvider;
     private String host;
     private PortSelectorChain portSelectorChain;
     private String process;
     private String app;
 
-    public DynoProcessServiceInstanceBuilder local(boolean isLocal){
-        this.isLocal = isLocal;
+    public DynoProcessServiceInstanceBuilder local(LocallyMutableMetadataProvider locallyMutableMetadataProvider){
+        this.locallyMutableMetadataProvider = locallyMutableMetadataProvider;
         return this;
     }
 
@@ -52,14 +52,14 @@ public class DynoProcessServiceInstanceBuilder {
     }
 
     public ServiceInstance build(){
-        if(isLocal){
+        if(locallyMutableMetadataProvider != null){
             final String herokuDnsFormationName = System.getenv("HEROKU_DNS_FORMATION_NAME");
             final String[] herokuParts = herokuDnsFormationName.split("\\.");
             final String localProcess = herokuParts[0];
             final String localApp = herokuParts[1];
             final String localHost = System.getenv("HEROKU_PRIVATE_IP");
 
-            return new LocalDynoProcessServiceInstance(localProcess + "." + localApp, localHost, portSelectorChain.getPort(), LocallyMutableMetadataProvider.getInstance());
+            return new LocalDynoProcessServiceInstance(localProcess + "." + localApp, localHost, portSelectorChain.getPort(), locallyMutableMetadataProvider);
 
         } else {
             return new RemoteDynoProcessServiceInstance(process + "." + app, host, portSelectorChain.getPort(), new RemoteMetadataProvider(new RestTemplate()));

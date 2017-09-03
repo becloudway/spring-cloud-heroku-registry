@@ -1,6 +1,7 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
 import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyDyno;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyListener;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyV1;
@@ -53,7 +54,7 @@ public class HerokuSpaceTopologyInstanceProvider implements HerokuInstanceProvid
     }
 
     @Override
-    public ServiceInstance getLocalServiceInstance() {
-        return new DynoProcessServiceInstanceBuilder().portSelectorChain(portSelectorChain).local(true).build();
+    public ServiceInstance getLocalServiceInstance(LocallyMutableMetadataProvider locallyMutableMetadataProvider) {
+        return new DynoProcessServiceInstanceBuilder().portSelectorChain(portSelectorChain).local(locallyMutableMetadataProvider).build();
     }
 }

@@ -1,6 +1,5 @@
 package com.xti.spring.cloud.heroku.discovery.instance;
 
-import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import org.junit.Test;
 
 import java.net.URI;
@@ -14,7 +13,7 @@ public class LocalDynoProcessServiceInstanceTest {
         final String serviceId = "web.app";
         final String host = "10.10.10.12";
         final int port = 8080;
-        LocalDynoProcessServiceInstance serviceInstance = new LocalDynoProcessServiceInstance(serviceId, host, port, LocallyMutableMetadataProvider.getInstance());
+        LocalDynoProcessServiceInstance serviceInstance = new LocalDynoProcessServiceInstance(serviceId, host, port, null);
 
         assertThat(serviceInstance.getUri()).isEqualTo(new URI("http://10.10.10.12:8080"));
     }

@@ -2,6 +2,7 @@ package com.xti.spring.cloud.heroku.discovery;
 
 import com.xti.spring.cloud.heroku.discovery.instance.HerokuSpaceTopologyInstanceProvider;
 import com.xti.spring.cloud.heroku.discovery.instance.port.DefaultPortSelectorChain;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuSpaceTopologyServiceProvider;
 import com.xti.spring.cloud.heroku.discovery.topology.HerokuSpaceTopologyPoller;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URI;
@@ -44,9 +46,13 @@ public class HerokuDiscoveryClientTest {
         environmentVariables.set("HEROKU_DNS_FORMATION_NAME", "web.spring-cloud-heroku-registry.app.localspace");
         environmentVariables.set("HEROKU_PRIVATE_IP", "10.0.151.218");
         when(watcher.getTopology()).thenReturn(SpaceTopologyLoader.getTopology("/space-topology.json"));
+        HerokuSpaceTopologyServiceProvider serviceProvider = new HerokuSpaceTopologyServiceProvider(watcher);
+        HerokuSpaceTopologyInstanceProvider instanceProvider = new HerokuSpaceTopologyInstanceProvider(new DefaultPortSelectorChain(), watcher);
         discoveryClient = new HerokuDiscoveryClient(
-                new HerokuSpaceTopologyServiceProvider(watcher),
-                new HerokuSpaceTopologyInstanceProvider(new DefaultPortSelectorChain(), watcher));
+                serviceProvider,
+                instanceProvider,
+                new LocallyMutableMetadataProvider(new RestTemplate(), serviceProvider, instanceProvider)
+        );
     }
 
     @Test

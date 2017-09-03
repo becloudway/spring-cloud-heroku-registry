@@ -1,6 +1,7 @@
 package com.xti.spring.cloud.heroku.discovery;
 
 import com.xti.spring.cloud.heroku.discovery.instance.HerokuInstanceProvider;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +19,12 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
 
     private HerokuServiceProvider serviceProvider;
     private HerokuInstanceProvider instanceProvider;
+    private LocallyMutableMetadataProvider locallyMutableMetadataProvider;
 
-    public HerokuDiscoveryClient(HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
+    public HerokuDiscoveryClient(HerokuServiceProvider herokuProcessServiceProvider, HerokuInstanceProvider herokuInstanceProvider, LocallyMutableMetadataProvider locallyMutableMetadataProvider) {
         this.serviceProvider = herokuProcessServiceProvider;
         this.instanceProvider = herokuInstanceProvider;
+        this.locallyMutableMetadataProvider = locallyMutableMetadataProvider;
         log.info("Started HerokuDiscoveryClient.");
     }
 
@@ -34,7 +37,7 @@ public class HerokuDiscoveryClient implements DiscoveryClient {
      * @return service instance with mutable metadata
      */
     public ServiceInstance getLocalServiceInstance() {
-        return instanceProvider.getLocalServiceInstance();
+        return instanceProvider.getLocalServiceInstance(locallyMutableMetadataProvider);
     }
 
     /**

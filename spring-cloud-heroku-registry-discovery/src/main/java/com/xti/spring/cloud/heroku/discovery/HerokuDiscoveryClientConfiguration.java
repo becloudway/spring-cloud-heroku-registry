@@ -5,6 +5,7 @@ import com.xti.spring.cloud.heroku.discovery.instance.HerokuSpaceTopologyInstanc
 import com.xti.spring.cloud.heroku.discovery.instance.port.ClusterPortNotFoundException;
 import com.xti.spring.cloud.heroku.discovery.instance.port.DefaultPortSelectorChain;
 import com.xti.spring.cloud.heroku.discovery.instance.port.PortSelectorChain;
+import com.xti.spring.cloud.heroku.discovery.metadata.LocallyMutableMetadataProvider;
 import com.xti.spring.cloud.heroku.discovery.metadata.MetadataFilter;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuServiceProvider;
 import com.xti.spring.cloud.heroku.discovery.process.HerokuSpaceTopologyServiceProvider;
@@ -14,10 +15,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @ConditionalOnProperty(value = "heroku.registry.discovery.enabled", matchIfMissing = true)
@@ -45,8 +48,14 @@ public class HerokuDiscoveryClientConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public HerokuDiscoveryClient herokuDiscoveryClient(HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider){
-        return new HerokuDiscoveryClient(herokuServiceProvider, herokuInstanceProvider);
+    public LocallyMutableMetadataProvider locallyMutableMetadataProvider(HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider) {
+        return new LocallyMutableMetadataProvider(new RestTemplate(), herokuServiceProvider, herokuInstanceProvider);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DiscoveryClient herokuDiscoveryClient(HerokuServiceProvider herokuServiceProvider, HerokuInstanceProvider herokuInstanceProvider, LocallyMutableMetadataProvider locallyMutableMetadataProvider){
+        return new HerokuDiscoveryClient(herokuServiceProvider, herokuInstanceProvider, locallyMutableMetadataProvider);
     }
 
     @Bean
