@@ -1,5 +1,7 @@
 package com.xti.spring.cloud.heroku.discovery.metadata;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.MediaType;
@@ -21,13 +23,17 @@ public class MetadataController {
     @Autowired
     private LocallyMutableMetadataProvider metadataProvider;
 
+    private static final Logger log = LoggerFactory.getLogger(MetadataController.class);
+
     @GetMapping()
     public @ResponseBody Map<String, String> getMetadata() {
+        log.trace("received call for metadata");
         return metadataProvider.getMetadata();
     }
 
     @GetMapping(path = "/notify", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Map<String, String> forceHeartBeat() {
+        log.trace("notified of metadata changes");
         applicationEventPublisher.publishEvent(new RemoteMetadataChangedEvent(this, null));
         return Collections.singletonMap("status", "ok");
     }
